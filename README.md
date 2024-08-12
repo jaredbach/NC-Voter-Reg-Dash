@@ -1,7 +1,3 @@
-Sure! Here's a basic README file template for your GitHub repository that you can customize according to your needs:
-
----
-
 # North Carolina Voter Registration Dashboard 2024
 
 ## Overview
@@ -74,7 +70,3 @@ Feel free to contribute to this project! If you have suggestions or improvements
 
 - **Dash:** A productive Python framework for building web applications.
 - **Plotly:** An open-source graphing library for Python.
-
----
-
-Feel free to adjust the details, add sections, or customize this template based on the specifics of your project and repository.
