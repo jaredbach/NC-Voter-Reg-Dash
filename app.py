@@ -43,19 +43,19 @@ def format_number(value):
     elif value >= 1_000:
         return f"{value / 1_000:.1f}K"
     else:
-        return str(value)
+        return f"{value:,.0f}"
 
 # Initialize the Dash app
 app = dash.Dash(__name__)
 
 # Define the layout of the app
-app.layout = html.Div(style={'font-family': 'Calibri'}, children=[
-    html.H1("North Carolina Voter Registration Dashboard 2024"),
+app.layout = html.Div(style={'font-family': 'Arial', 'background-color': '#f7f7f7', 'padding': '20px'}, children=[
+    html.H1("North Carolina Voter Registration Dashboard 2024", style={'text-align': 'center', 'color': '#333'}),
 
     # KPI Box
     html.Div([
-        html.H3(id='kpi-date-title', style={'text-align': 'left', 'padding': '10px'}),
-        html.Div(id='kpi-box', style={'display': 'flex', 'justify-content': 'space-evenly', 'padding': '10px'})
+        html.H3(id='kpi-date-title', style={'text-align': 'left', 'padding': '10px', 'color': '#555'}),
+        html.Div(id='kpi-box', style={'display': 'flex', 'justify-content': 'space-evenly', 'padding': '20px', 'border-radius': '10px', 'background-color': '#ffffff', 'box-shadow': '0px 4px 8px rgba(0, 0, 0, 0.1)'})
     ], style={'margin-bottom': '20px'}),
 
     # Container for the map and graph
@@ -68,16 +68,16 @@ app.layout = html.Div(style={'font-family': 'Calibri'}, children=[
                     id='date-dropdown',
                     options=[{'label': date, 'value': date} for date in dates],
                     value=dates[0],  # Set the default value to the first date
-                    style={'width': '200px', 'margin': '0 auto'}
+                    style={'width': '200px', 'margin': '10px auto', 'border-radius': '5px'}
                 ),
                 dcc.Dropdown(
                     id='data-dropdown',
                     options=[{'label': col, 'value': col} for col in data_columns],
                     value='Total',  # Set the default value to 'Total'
-                    style={'width': '200px', 'margin': '10px auto'}
+                    style={'width': '200px', 'margin': '10px auto', 'border-radius': '5px'}
                 ),
             ], style={'text-align': 'center'})
-        ], style={'width': '48%', 'display': 'inline-block'}),
+        ], style={'width': '48%', 'display': 'inline-block', 'border-radius': '10px', 'background-color': '#ffffff', 'box-shadow': '0px 4px 8px rgba(0, 0, 0, 0.1)', 'padding': '10px'}),
         
         # Right side for graph
         html.Div([
@@ -85,20 +85,20 @@ app.layout = html.Div(style={'font-family': 'Calibri'}, children=[
             html.Div([
                 dcc.Dropdown(
                     id='county-dropdown',
-                    options=[{'label': 'All Counties', 'value': 'All'}] + [{'label': county, 'value': county} for county in sorted(df['County'].unique())],
+                    options=[{'label': 'All County', 'value': 'All'}] + [{'label': county, 'value': county} for county in sorted(df['County'].unique())],
                     value='All',
                     clearable=False,
-                    style={'width': '200px', 'margin': '10px auto'}
+                    style={'width': '200px', 'margin': '10px auto', 'border-radius': '5px'}
                 ),
                 dcc.Dropdown(
                     id='column-dropdown',
                     options=[{'label': col, 'value': col} for col in data_columns],
                     value='Total',
                     clearable=False,
-                    style={'width': '200px', 'margin': '0 auto'}
+                    style={'width': '200px', 'margin': '10px auto', 'border-radius': '5px'}
                 ),
             ], style={'text-align': 'center'})
-        ], style={'width': '48%', 'display': 'inline-block', 'float': 'right'})
+        ], style={'width': '48%', 'display': 'inline-block', 'margin-left': '4%', 'border-radius': '10px', 'background-color': '#ffffff', 'box-shadow': '0px 4px 8px rgba(0, 0, 0, 0.1)', 'padding': '10px'})
     ], style={'display': 'flex'}),
 ])
 
@@ -125,27 +125,27 @@ def update_content(selected_date, selected_column, selected_county, selected_col
 
     kpi_box = html.Div([
         html.Div([
-            html.H3("Total Registered Voters:"),
-            html.P(total_voters, style={'fontSize': 24})
+            html.H3("Total Registered Voters", style={'color': '#333'}),
+            html.P(total_voters, style={'fontSize': 24, 'color': '#333'})
         ], style={'width': '24%', 'display': 'inline-block', 'text-align': 'center'}),
         
         html.Div([
-            html.H3("Democrats:"),
-            html.P(democrats, style={'fontSize': 24})
+            html.H3("Democrats", style={'color': '#333'}),
+            html.P(democrats, style={'fontSize': 24, 'color': '#333'})
         ], style={'width': '24%', 'display': 'inline-block', 'text-align': 'center'}),
         
         html.Div([
-            html.H3("Republicans:"),
-            html.P(republicans, style={'fontSize': 24})
+            html.H3("Republicans", style={'color': '#333'}),
+            html.P(republicans, style={'fontSize': 24, 'color': '#333'})
         ], style={'width': '24%', 'display': 'inline-block', 'text-align': 'center'}),
         
         html.Div([
-            html.H3("Unaffiliated:"),
-            html.P(unaffiliated, style={'fontSize': 24})
+            html.H3("Unaffiliated", style={'color': '#333'}),
+            html.P(unaffiliated, style={'fontSize': 24, 'color': '#333'})
         ], style={'width': '24%', 'display': 'inline-block', 'text-align': 'center'}),
     ], style={'display': 'flex', 'justify-content': 'space-evenly', 'padding': '10px', 'width': '100%'})
 
-    kpi_date_title = f"As of {most_recent_date.strftime('%Y-%m-%d')}"
+    kpi_date_title = f"As of {most_recent_date.strftime('%B %d, %Y')}"
 
     # Update the map
     filtered_df = df[df['Week Ending'].dt.strftime('%Y-%m-%d') == selected_date]
@@ -172,10 +172,10 @@ def update_content(selected_date, selected_column, selected_county, selected_col
             scope="usa",
             labels={'Weekly Change': 'Weekly Change'},
             hover_name='County',
-            hover_data={'FIPS': False, selected_column: True}
+            hover_data={'Weekly Change': ':,.0f', selected_column: ':,.0f'}
         )
         map_fig.update_geos(fitbounds="locations", visible=False)
-        map_fig.update_layout(title=f"Weekly Changes in {selected_column} by County")
+        map_fig.update_layout(title=f"Weekly Changes in {selected_column} by County", margin={"r":0,"t":30,"l":0,"b":0})
 
     # Update the graph
     if selected_county == 'All':
@@ -208,13 +208,18 @@ def update_content(selected_date, selected_column, selected_county, selected_col
         hovermode="x unified",  # This ensures the tooltip shows on hovering over the X-axis
         hoverlabel=dict(
             bgcolor="white",  # Background color of the tooltip
-            font_size=16,
-            font_family="Calibri"
-        )
+            font_size=14,  # Updated font size to 14
+            font_family="Arial"
+        ),
+        margin={"r":0,"t":30,"l":0,"b":0}  # Adds space between the two graphs
     )
 
-    # Set hover template to show full date
-    graph_fig.update_traces(hovertemplate='%{x|%B %d, %Y}<br>%{y:.2f}')
+    # Set hover template for the graph to show full date and formatted values
+    graph_fig.update_traces(hovertemplate='%{x|%B %d, %Y}<br>%{y:,.0f}')  # Updated to format with commas and no decimal places
+
+    # Set hover template for the map to show county name, registered voters, and weekly change
+    map_fig.update_traces(hovertemplate='%{hovertext}<br>Registered Voters: %{customdata[1]:,.0f}<br>Weekly Change: %{z:,.0f}', 
+                          hovertext=filtered_df_changes['County'])
 
     return kpi_date_title, kpi_box, map_fig, graph_fig
 

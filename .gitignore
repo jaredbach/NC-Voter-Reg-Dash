@@ -1,0 +1,7 @@
+# Ignore the virtual environment
+venv/
+env/
+.virtualenv/
+
+# Ignore the ncvotes directory
+ncvotes/
