@@ -19,8 +19,8 @@ The **North Carolina Voter Registration Dashboard 2024** is a web application de
 1. **Clone the Repository:**
 
     ```bash
-    git clone https://github.com/your-username/your-repo-name.git
-    cd your-repo-name
+    git clone https://github.com/jaredbach/NC-Voter-Reg-Dash.git
+    cd NC-Voter-Reg-Dash
     ```
 
 2. **Create a Virtual Environment (optional but recommended):**
