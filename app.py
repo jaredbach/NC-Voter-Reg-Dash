@@ -125,22 +125,22 @@ def update_content(selected_date, selected_column, selected_county, selected_col
 
     kpi_box = html.Div([
         html.Div([
-            html.H3("Total Registered Voters", style={'color': '#333'}),
+            html.H3("Total Registered Voters:", style={'color': '#333'}),
             html.P(total_voters, style={'fontSize': 24, 'color': '#333'})
         ], style={'width': '24%', 'display': 'inline-block', 'text-align': 'center'}),
         
         html.Div([
-            html.H3("Democrats", style={'color': '#333'}),
+            html.H3("Democrats:", style={'color': '#333'}),
             html.P(democrats, style={'fontSize': 24, 'color': '#333'})
         ], style={'width': '24%', 'display': 'inline-block', 'text-align': 'center'}),
         
         html.Div([
-            html.H3("Republicans", style={'color': '#333'}),
+            html.H3("Republicans:", style={'color': '#333'}),
             html.P(republicans, style={'fontSize': 24, 'color': '#333'})
         ], style={'width': '24%', 'display': 'inline-block', 'text-align': 'center'}),
         
         html.Div([
-            html.H3("Unaffiliated", style={'color': '#333'}),
+            html.H3("Unaffiliated:", style={'color': '#333'}),
             html.P(unaffiliated, style={'fontSize': 24, 'color': '#333'})
         ], style={'width': '24%', 'display': 'inline-block', 'text-align': 'center'}),
     ], style={'display': 'flex', 'justify-content': 'space-evenly', 'padding': '10px', 'width': '100%'})
@@ -208,7 +208,7 @@ def update_content(selected_date, selected_column, selected_county, selected_col
         hovermode="x unified",  # This ensures the tooltip shows on hovering over the X-axis
         hoverlabel=dict(
             bgcolor="white",  # Background color of the tooltip
-            font_size=14,  # Updated font size to 14
+            font_size=12,  # Updated font size to 12
             font_family="Arial"
         ),
         margin={"r":0,"t":30,"l":0,"b":0}  # Adds space between the two graphs
