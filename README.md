@@ -4,7 +4,7 @@
 
 The **North Carolina Voter Registration Dashboard 2024** is a web application designed to visualize voter registration data for North Carolina. Built using Dash and Plotly, this dashboard provides insights into weekly changes in voter registrations across various demographics and political affiliations. The application allows users to interactively explore data through choropleth maps and line graphs.
 
-<img width="1503" alt="image" src="https://github.com/user-attachments/assets/f9f9e0c2-9fa4-4ccd-8005-4e9fe5fda5e3">
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/59ed4a1c-3938-4d36-95ca-6ac1476cc520">
 
 ## Features
 
