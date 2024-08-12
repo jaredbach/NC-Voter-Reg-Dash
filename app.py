@@ -182,20 +182,20 @@ def update_content(selected_date, selected_column, selected_county, selected_col
         aggregated_df = df.groupby('Week Ending').agg({selected_column_graph: 'sum'}).reset_index()
         aggregated_df['Weekly Change'] = aggregated_df[selected_column_graph].diff().fillna(0)
         graph_fig = px.line(aggregated_df,
-                            x='Week Ending',
-                            y='Weekly Change',
-                            title=f'Weekly Changes in {selected_column_graph} (All Counties)',
-                            labels={'Weekly Change': f'Change in {selected_column_graph}'},
-                            line_shape='linear')
+                    x='Week Ending',
+                    y='Weekly Change',
+                    title=f'Weekly Changes in {selected_column_graph} (All Counties)',
+                    labels={'Weekly Change': f'Change in {selected_column_graph}'},
+                    line_shape='linear')
     else:
         filtered_df = df[df['County'] == selected_county]
         filtered_df = calculate_weekly_changes(filtered_df, selected_column_graph)
         graph_fig = px.line(filtered_df,
-                            x='Week Ending',
-                            y='Weekly Change',
-                            title=f'Weekly Changes in {selected_column_graph} for {selected_county}',
-                            labels={'Weekly Change': f'Change in {selected_column_graph}'},
-                            line_shape='linear')
+                    x='Week Ending',
+                    y='Weekly Change',
+                    title=f'Weekly Changes in {selected_column_graph} for {selected_county}',
+                    labels={'Weekly Change': f'Change in {selected_column_graph}'},
+                    line_shape='linear')
 
     graph_fig.update_layout(
         xaxis_title='Date',
@@ -204,8 +204,17 @@ def update_content(selected_date, selected_column, selected_county, selected_col
             tickformat="%b %Y",
             dtick="M1",
             tickangle=-45
+        ),
+        hovermode="x unified",  # This ensures the tooltip shows on hovering over the X-axis
+        hoverlabel=dict(
+            bgcolor="white",  # Background color of the tooltip
+            font_size=16,
+            font_family="Calibri"
         )
     )
+
+    # Set hover template to show full date
+    graph_fig.update_traces(hovertemplate='%{x|%B %d, %Y}<br>%{y:.2f}')
 
     return kpi_date_title, kpi_box, map_fig, graph_fig
 
