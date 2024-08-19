@@ -59,13 +59,16 @@ class UpdateWeekly:
         df['Week Ending'] = self.most_recent_saturday
         df['CountyName'] = df['CountyName'].str.capitalize()
 
+        # Read FIPS.csv, ensuring FIPS codes are treated as strings with leading zeros preserved
         df_fips = pd.read_csv('FIPS.csv')
         df_fips['FIPS'] = df_fips['FIPS'].astype(str).str.zfill(3)
+
         merged_df = pd.merge(df, df_fips, left_on='CountyName', right_on='County', how='inner')
 
         merged_df = merged_df.drop(columns=['CountyName'])
         df = merged_df
 
+        # Read CountyPopulations.csv and ensure data is merged correctly
         df_pop = pd.read_csv('CountyPopulations.csv')
         merged_df = pd.merge(df, df_pop, left_on='County', right_on='County', how='inner')
 
@@ -91,16 +94,21 @@ def update_combined_data():
     combined_data_path = "../combined_data.csv"
     
     if os.path.exists(combined_data_path):
-        combined_data = pd.read_csv(combined_data_path)
+        # Ensure FIPS is read as a string
+        combined_data = pd.read_csv(combined_data_path, dtype={'FIPS': str})
     else:
         combined_data = pd.DataFrame()
 
+    # Check if the current week's data is already in the combined data
     if scraper.most_recent_saturday in combined_data['Week Ending'].values:
         print("Data for this date already exists. No update needed.")
     else:
         combined_data = pd.concat([combined_data, new_data])
+        # Ensure FIPS remains as a string with leading zeros
+        combined_data['FIPS'] = combined_data['FIPS'].astype(str).str.zfill(3)
         combined_data.to_csv(combined_data_path, index=False)
         print("Data updated successfully.")
+
 
 if __name__ == "__main__":
     update_combined_data()
