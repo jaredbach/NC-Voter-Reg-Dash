@@ -5,3 +5,4 @@ env/
 
 # Ignore the ncvotes directory
 ncvotes/
+.DS_Store
