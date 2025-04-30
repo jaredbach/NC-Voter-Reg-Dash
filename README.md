@@ -1,4 +1,5 @@
 # North Carolina Voter Registration Dashboard 2024
+Update April 2025: I was busy working on the Kamala Harris campaigin in October 2024 in Pennsylvania when this application sadly decided to break. I never had the chance to fix but this code is still a great reference point!
 
 ## Overview
 
